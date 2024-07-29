@@ -87,7 +87,7 @@ const Registar = () => {
                 
                     headers: { 'Content-Type': 'application/json' },
                     method: 'POST',
-                    body: JSON.stringify({ email, nome, pass: passe }),
+                    body: JSON.stringify({ email, name: nome, pass: passe }),
                     credentials: 'include'
 
                 
