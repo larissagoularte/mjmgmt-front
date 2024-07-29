@@ -87,7 +87,7 @@ const Registar = () => {
                 
                     headers: { 'Content-Type': 'application/json' },
                     method: 'POST',
-                    body: JSON.stringify({ email, name, pass: passe }),
+                    body: JSON.stringify({ email, pass: passe }),
                     credentials: 'include'
 
                 
@@ -111,7 +111,7 @@ const Registar = () => {
             errRef.current.focus();
         }
     }
-    
+
     return (
         <div className="flex justify-center xs:h-screen sm:h-screen md:h-auto lg:h-auto h-screen">
             {success && (<SuccessoModal />)} 
