@@ -80,23 +80,26 @@ const Registar = () => {
             setErrMsg("Dados inválidos");
             return;
         }
-        
+
         try {
-            const response = await axios.post('https://mjmgmt-back.onrender.com/auth/register', 
-                JSON.stringify({ name: nome, email: email, pass: passe}),
+            const response = await fetch('https://mjmgmt-back.onrender.com/auth/register', 
                 {
+                
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                    
-                }
+                    method: 'POST',
+                    body: JSON.stringify({ email, name, pass: passe }),
+                    credentials: 'include'
+
+                
+            }
             );
 
-            setSuccess(true);            
+            setSuccess(true);
             setTimeout(() => {
                 navigate('/login');
                 setSuccess(false);
             }, 3000);
-            
+
         } catch(err) {
             if(!err?.response) {
                 setErrMsg('Servidor parou de responder.')
@@ -108,7 +111,7 @@ const Registar = () => {
             errRef.current.focus();
         }
     }
-
+    
     return (
         <div className="flex justify-center xs:h-screen sm:h-screen md:h-auto lg:h-auto h-screen">
             {success && (<SuccessoModal />)} 

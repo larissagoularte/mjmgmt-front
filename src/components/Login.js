@@ -32,16 +32,20 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://mjmgmt-back.onrender.com/auth/login', 
-                JSON.stringify({email, pass: passe}),
-                {
-                    headers: {'Content-Type': 'application/json'},
-                    withCredentials: true
-                }
+            const response = await fetch('https://mjmgmt-back.onrender.com/auth/login', {
+                
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                body: JSON.stringify({email, pass: passe}),
+                credentials: 'include'
+            }
+            
             )
 
-            const user = response?.data?.email;
-            const name = response?.data?.name;
+            const data = await response.json();
+
+            const user = data?.email;
+            const name = data?.name;
 
             setAuth({ email: user, name });
             navigate('/');
