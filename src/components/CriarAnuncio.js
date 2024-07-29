@@ -75,22 +75,28 @@ const CriarAnuncio = () => {
         }
 
         try {
-            const response = await axios.post('https://mjmgmt-back.onrender.com/listings/add', formData, {
-                withCredentials: true
+            const response = await fetch('https://mjmgmt-back.onrender.com/listings/add', {
+                method: 'POST',
+                credentials: 'include',
+                body: formData
             });
 
-            console.log(response.data);
+            if (!response.ok) {
+                if (response.status === 400) {
+                    const errorData = await response.json();
+                    setErrMsg(errorData.message || 'Dados inválidos.');
+                } else if (response.status === 401) {
+                    setErrMsg('Unauthorized');
+                } else {
+                    setErrMsg('Creation Failed');
+                }
+                return;
+            }
+
+            const data = await response.json();
             navigate('/');
         } catch(err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg(err.response.data.message || 'Dados inválidos.');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Creation Failed');
-            }
+            setErrMsg('No Server Response');
         }
     }
   return (

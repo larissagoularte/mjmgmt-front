@@ -24,11 +24,21 @@ const Home = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await axios.get('https://mjmgmt-back.onrender.com/listings', {
-                    withCredentials: true
+                const response = await fetch('https://mjmgmt-back.onrender.com/listings', {
+                    method: 'GET',
+                    credentials: 'include'
                 });
 
-                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        console.log('Listings not found');
+                    } else {
+                        console.log('Failed to fetch anuncios');
+                    }
+                    return;
+                }
+
+                const data = await response.json();
                 setListings(response.data);
 
                 const initialIndexes = {};
@@ -55,9 +65,19 @@ const Home = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://mjmgmt-back.onrender.com/listings/${id}`, {
-                withCredentials: true
+            const response = await fetch(`https://mjmgmt-back.onrender.com/listings/${id}`, {
+                method: 'DELETE',
+                credentials: 'include'
             });
+
+            if(!response.ok) {
+                if (response.status === 403) {
+                    console.log('Nao autorizado');
+                } else {
+                    console.log('Falha ao excluir anuncio');
+                }
+                return;   
+            }
 
             setListings(listings.filter(listing => listing._id !== id));
         } catch (err) {
