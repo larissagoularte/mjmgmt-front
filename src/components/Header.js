@@ -18,12 +18,17 @@ const Header = () => {
         try {
             const token = localStorage.getItem('token');
             console.log("Auth Token:", auth?.token); 
-            await axios.post('https://mjmgmt-back.onrender.com/auth/logout', {}, {
+            const response = await fetch('https://mjmgmt-back.onrender.com/auth/logout', {
+                method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
             },
-                withCredentials: true
+                credentials: 'include'
             });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
 
             setAuth(null);
             navigate('/login');
