@@ -94,6 +94,8 @@ const Home = () => {
             [listingId]: (prevState[listingId] + 1) % listings.find(a => a._id === listingId).media.length
         }));
     }
+
+    const r2PublicEndpoint = process.env.REACT_APP_R2_PUBLIC;
     
     const getImageUrl = (filename) => `${r2PublicEndpoint}/${filename}`
 
