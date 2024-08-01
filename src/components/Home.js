@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from '../api/axios';
 import AuthContext from '../context/AuthProvider';
 import { Link } from 'react-router-dom';
 import { MdDelete, MdPlace } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-
-const FETCH_LISTINGS_URL = process.env.FETCH_LISTINGS_URL;
-const apiUrl = process.env.API_URL;
 
 const Home = () => {
     const { auth } = useContext(AuthContext);
@@ -39,7 +35,7 @@ const Home = () => {
                 }
 
                 const data = await response.json();
-                setListings(response.data);
+                setListings(data);
 
                 const initialIndexes = {};
 
@@ -47,8 +43,8 @@ const Home = () => {
                     initialIndexes[listing._id] = 0;
                 });
                 setCurrentImageIndex(initialIndexes);
+                console.log(data);
 
-                console.log(response.data);
             } catch (err) {
                 if (!err?.response) {
                     console.log('No Server Response');
@@ -94,16 +90,20 @@ const Home = () => {
     const handlePrevImage = (listingId) => {
         setCurrentImageIndex(prevState => ({
             ...prevState,
-            [listingId]: (prevState[listingId] - 1 + listings.find(a => a._id === listingId).images.length) % listings.find(a => a._id === listingId).images.length
+            [listingId]: (prevState[listingId] - 1 + listings.find(a => a._id === listingId).media.length) % listings.find(a => a._id === listingId).media.length
         }));
     }
 
     const handleNextImage = (listingId) => {
         setCurrentImageIndex(prevState => ({
             ...prevState,
-            [listingId]: (prevState[listingId] + 1) % listings.find(a => a._id === listingId).images.length
+            [listingId]: (prevState[listingId] + 1) % listings.find(a => a._id === listingId).media.length
         }));
     }
+    
+    const r2Endpoint = process.env.REACT_APP_R2_PUBLIC;
+
+    const getImageUrl = (filename) => `${r2PublicEndpoint}/${filename}`
 
     return (
 
@@ -118,9 +118,9 @@ const Home = () => {
                     listings.map((listing) => (
                         <div key={listing._id} className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm flex flex-col min-w-lg">
                             <div className="relative h-48 overflow-hidden">
-                                {listing.images && listing.images.length > 0 && (
+                                {listing.media && listing.media.length > 0 && (
                                     <>
-                                        <img src={`https://mjmgmt-back.onrender.com${listing.images[currentImageIndex[listing._id]]}`} alt={`Imagem ${currentImageIndex[listing._id] + 1}`} className="w-full h-full object-cover" />
+                                        <img src={getImageUrl(listing.media[currentImageIndex[listing._id]])} alt={`Imagem ${currentImageIndex[listing._id] + 1}`} className="w-full h-full object-cover" />
                                         <button
                                             className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white bg-opacity-75 text-gray-800 px-2 py-1 rounded focus:outline-none hover:bg-opacity-100"
                                             onClick={() => handlePrevImage(listing._id)}
