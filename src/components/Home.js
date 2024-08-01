@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await fetch('https://mjmgmt-back.onrender.com/listings', {
+                const response = await fetch('https://mjmgmt-back.onrender.com/listings/', {
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -36,7 +36,7 @@ const Home = () => {
 
                 const data = await response.json();
                 setListings(data);
-
+                
                 const initialIndexes = {};
 
                 response.data.forEach(listing => {
@@ -46,13 +46,7 @@ const Home = () => {
                 console.log(data);
 
             } catch (err) {
-                if (!err?.response) {
-                    console.log('No Server Response');
-                } else if (err.response?.status === 404) {
-                    console.log('Listings not found');
-                } else {
-                    console.log('Failed to fetch anuncios');
-                }
+                console.log('error:', err)
             }
         };
 
@@ -101,8 +95,6 @@ const Home = () => {
         }));
     }
     
-    const r2Endpoint = process.env.REACT_APP_R2_PUBLIC;
-
     const getImageUrl = (filename) => `${r2PublicEndpoint}/${filename}`
 
     return (

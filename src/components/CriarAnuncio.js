@@ -1,12 +1,9 @@
 import React, { useContext, useState, useRef } from 'react';
 import AuthContext from '../context/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
 import { FaTimes } from "react-icons/fa";
 import Toggle from 'react-toggle';
 import "react-toggle/style.css";
-
-const CREATE_LISTING_URL = process.env.CREATE_LISTING_URL;
 
 const CriarAnuncio = () => {
     const { auth } = useContext(AuthContext);
@@ -39,8 +36,6 @@ const CriarAnuncio = () => {
                 fileInputRef.current.value = '';
             }
             return;
-        } else {
-            console.log('');
         }
 
         setImages(prevImages => [...prevImages, ...files]);
@@ -78,7 +73,8 @@ const CriarAnuncio = () => {
             const response = await fetch('https://mjmgmt-back.onrender.com/listings/add', {
                 method: 'POST',
                 credentials: 'include',
-                body: formData
+                body: formData,
+                
             });
 
             if (!response.ok) {
