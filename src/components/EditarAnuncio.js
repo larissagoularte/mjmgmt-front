@@ -22,8 +22,8 @@ const EditarAnuncio = () => {
     useEffect(() => {
         const fetchListingById = async () => {
             try {
-                const response = await axios.get(`https://mjmgmt-back.onrender.com/listings/${id}`, {
-                    withCredentials: true
+                const response = await fetch(`https://mjmgmt-back.onrender.com/listings/${id}`, {
+                    credentials: 'include'
                 });
 
                 setListing(response.data);

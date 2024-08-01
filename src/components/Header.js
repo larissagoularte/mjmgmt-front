@@ -16,7 +16,6 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            const token = localStorage.getItem('token');
             console.log("Auth Token:", auth?.token); 
             const response = await fetch('https://mjmgmt-back.onrender.com/auth/logout', {
                 method: 'POST',
