@@ -39,7 +39,7 @@ const Home = () => {
                 
                 const initialIndexes = {};
 
-                response.data.forEach(listing => {
+                data.forEach(listing => {
                     initialIndexes[listing._id] = 0;
                 });
                 setCurrentImageIndex(initialIndexes);
