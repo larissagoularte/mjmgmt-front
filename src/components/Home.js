@@ -56,7 +56,7 @@ const Home = () => {
     const handleDelete = async (id) => {
         console.log('id:', id)
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/${id}/`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/listings/${id}/`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
