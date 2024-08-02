@@ -22,6 +22,7 @@ const EditarAnuncio = () => {
         const fetchListingById = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/listings/${id}`, {
+                    method: 'PUT',
                     credentials: 'include'
                 });
 
