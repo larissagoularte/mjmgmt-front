@@ -22,7 +22,7 @@ const EditarAnuncio = () => {
     useEffect(() => {
         const fetchListingById = async () => {
             try {
-                const response = await fetch(`https://mjmgmt-back.onrender.com/listings/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/listings/${id}`, {
                     credentials: 'include'
                 });
 
@@ -50,7 +50,7 @@ const EditarAnuncio = () => {
 
     const handleRemoverImagem = (image) => {
         setImagesRemove([...imagesRemove, image]);
-        setListing({ ...listing, images: listing.images.filter(img => img !== image) });
+        setListing({ ...listing, media: listing.media.filter(img => img !== image) });
     };
 
     const handleNovasImagens = (e) => {
@@ -90,7 +90,7 @@ const EditarAnuncio = () => {
 
         const formData = new FormData();
         newImages.forEach(file => {
-            formData.append('images', file);
+            formData.append('media', file);
         });
 
         const updatedData = { ...listing, imagesRemove, status: toggleStatus ? 'available' : 'unavailable' };
@@ -98,7 +98,7 @@ const EditarAnuncio = () => {
         formData.append('data', JSON.stringify(updatedData));
 
         try {
-            const response = await axios.put(`https://mjmgmt-back.onrender.com/listings/${id}`, formData, {
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/listings/${id}`, formData, {
                 withCredentials: true
             });
 
@@ -120,6 +120,7 @@ const EditarAnuncio = () => {
     if (!listing) return <div>Loading...</div>;
 
     const { title, description, rent, rooms, location, status } = listing;
+
 
     return (
         <div className="flex flex-col items-center md:pb-5 lg:pb-5">
@@ -202,12 +203,12 @@ const EditarAnuncio = () => {
                             <div className='relative mb-4 flex flex-col'>
                                 <label htmlFor="imagens" className='text-gray-900 text-xl font-medium border-b mb-4'>Imagens</label>
                                 <div className='flex flex-wrap gap-4'>
-                                {listing.images.map((image, index) => (
+                                {listing.media.map((image, index) => (
                                     <div key={index} className='relative w-32 h-32'>
-                                        <img src={`https://mjmgmt-back.onrender.com${image}`} alt={`Imagem ${index}`} className='w-full h-full object-cover rounded' />
+                                        <img src={`${process.env.REACT_APP_API_URL}${media}`} alt={`Imagem ${index}`} className='w-full h-full object-cover rounded' />
                                         <button 
                                             type="button" 
-                                            onClick={() => handleRemoverImagem(image)}
+                                            onClick={() => handleRemoverImagem(media)}
                                             className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 focus:outline-none"
                                         >
                                             <FaTimes size={16} />    
@@ -221,7 +222,7 @@ const EditarAnuncio = () => {
                                 <label htmlFor='newImages' className='text-gray-900 text-xl font-medium border-b'>Adicionar Imagens</label>
                                 <input 
                                     type="file" 
-                                    id="images"
+                                    id="media"
                                     ref={fileInputRef}
                                     multiple 
                                     onChange={handleNovasImagens} 

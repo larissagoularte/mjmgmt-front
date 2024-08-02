@@ -15,8 +15,8 @@ const CriarAnuncio = () => {
     const [location, setLocation] = useState('');
     const [status, setStatus] = useState(true);
     const [rent, setRent] = useState('');
-    const [images, setImages] = useState([]);
-    const [previewImages, setPreviewImages] = useState([]);
+    const [media, setMedia] = useState([]);
+    const [preiewMedia, setPreviewMedia] = useState([]);
     const [errMsg, setErrMsg] = useState('');
 
     const fileInputRef = useRef(null);
@@ -25,7 +25,7 @@ const CriarAnuncio = () => {
         const files = Array.from(e.target.files);
 
         const newFiles = files.filter(file => 
-            !images.some(existingFile => 
+            !media.some(existingFile => 
                 existingFile.name === file.name && existingFile.size === file.size
             )
         );
@@ -38,10 +38,10 @@ const CriarAnuncio = () => {
             return;
         }
 
-        setImages(prevImages => [...prevImages, ...files]);
+        setMedia(prevImages => [...prevImages, ...files]);
 
         const imagePreviews = files.map(file => URL.createObjectURL(file));
-        setPreviewImages(prevPreviews => [...prevPreviews, ...imagePreviews]);
+        setPreviewMedia(prevPreviews => [...prevPreviews, ...imagePreviews]);
 
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -49,8 +49,8 @@ const CriarAnuncio = () => {
     };
 
     const handleDeleteImage = (index) => {
-        setImages(prevImages => prevImages.filter((_, i) => i !== index));
-        setPreviewImages(prevPreviews => prevPreviews.filter((_, i) => i !== index));
+        setMedia(prevImages => prevImages.filter((_, i) => i !== index));
+        setPreviewMedia(prevPreviews => prevPreviews.filter((_, i) => i !== index));
     };
 
     const handleSubmit = async (e) => {
@@ -65,12 +65,12 @@ const CriarAnuncio = () => {
         formData.append('rent', rent);
         formData.append('status', status ? 'available' : 'unavailable');
 
-        for (let i = 0; i < images.length; i++) {
-            formData.append('images', images[i]);
+        for (let i = 0; i < media.length; i++) {
+            formData.append('media', media[i]);
         }
 
         try {
-            const response = await fetch('https://mjmgmt-back.onrender.com/listings/add', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/listings/add`, {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,
@@ -177,10 +177,10 @@ const CriarAnuncio = () => {
 
 
                 <div className='relative mb-4 flex flex-col'>
-                    <label htmlFor="images" className='text-gray-900 text-xl font-medium border-b'>Imagens</label>
+                    <label htmlFor="media" className='text-gray-900 text-xl font-medium border-b'>Media</label>
                     <input
                         type="file"
-                        id="images"
+                        id="media"
                         ref={fileInputRef}
                         onChange={handleImagemChange}
                         multiple
@@ -188,7 +188,7 @@ const CriarAnuncio = () => {
                     />
 
                     <div className='flex flex-wrap gap-4'>
-                        {previewImages.map((src, index) => (
+                        {previewMedia.map((src, index) => (
                             <div key={index} className="relative w-32 h-32">
                                     <img src={src} alt={`Preview ${index + 1}`} className="w-full h-full object-cover rounded" />
                                     <button

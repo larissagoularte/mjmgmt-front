@@ -32,7 +32,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://mjmgmt-back.onrender.com/auth/login', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
                 
                 headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
@@ -107,7 +107,6 @@ const Login = () => {
                     </form>
 
                     <p className="text-sm text-gray-500 mt-3 self-center">
-                        Não tem conta? <Link to="/registar" className="text-indigo-500 hover:text-indigo-600"> Registar</Link>
                     </p>
             </section>
         </div>

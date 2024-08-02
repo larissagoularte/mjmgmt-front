@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Registar from "./components/Registar";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -19,7 +18,6 @@ function App() {
           <Header />
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/registar" element={<Registar />} />
             <Route path="/" element={
               <ProtectedRoute>
                 <Home />

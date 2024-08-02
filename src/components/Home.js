@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await fetch('https://mjmgmt-back.onrender.com/listings/', {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/listings/`, {
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -55,7 +55,7 @@ const Home = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`https://mjmgmt-back.onrender.com/listings/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/${id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });

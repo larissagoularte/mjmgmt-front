@@ -82,7 +82,7 @@ const Registar = () => {
         }
 
         try {
-            const response = await fetch('https://mjmgmt-back.onrender.com/auth/register', 
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/register`, 
                 {
                 
                     headers: { 'Content-Type': 'application/json' },

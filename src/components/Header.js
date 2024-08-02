@@ -17,7 +17,7 @@ const Header = () => {
     const handleLogout = async () => {
         try {
             console.log("Auth Token:", auth?.token); 
-            const response = await fetch('https://mjmgmt-back.onrender.com/auth/logout', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
