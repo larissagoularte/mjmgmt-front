@@ -37,14 +37,14 @@ const DetalhesAnuncio = () => {
 
     
     const handlePrevImage = () => {
-        if (listing && listing.images && listing.images.length > 0) {
-            setCurrentImageIndex((prevIndex) => (prevIndex - 1 + listing.images.length) % listing.images.length);
+        if (listing && listing.media && listing.media.length > 0) {
+            setCurrentImageIndex((prevIndex) => (prevIndex - 1 + listing.media.length) % listing.media.length);
         }
     };
     
     const handleNextImage = () => {
-        if (listing && listing.images && listing.images.length > 0) {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % listing.images.length);
+        if (listing && listing.media && listing.media.length > 0) {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % listing.media.length);
         }
     };
 
@@ -53,15 +53,15 @@ const DetalhesAnuncio = () => {
     };
 
     if (!listing) return <div>Loading...</div>;
-    const { title, description, rent, rooms, location, status, images } = listing;
+    const { title, description, rent, rooms, location, status, media } = listing;
   
     return (
         <div className='flex xs:flex-col sm:flex-col md:flex-col lg:flex-row flex-col lg:gap-5'>
             <div className='sm:w-full md:w-full lg:w-8/12 lg:py-5 lg:pl-5 flex flex-col gap-2 md:gap-5'>
                 <div className='bg-neutral-100 md:rounded-lg h-3/5 md:h-[600px] md:p-5'>
-                    {images && images.length > 0 && (
+                    {media && media.length > 0 && (
                         <div className='relative h-full'>
-                            <img src={`${process.env.REACT_APP_API_URL}${images[currentImageIndex]}`} className=' w-full h-full object-cover md:rounded-md'/>
+                            <img src={`${process.env.REACT_APP_API_URL}${media[currentImageIndex]}`} className=' w-full h-full object-cover md:rounded-md'/>
                             <button
                                 className="absolute top-1/2 text-4xl md:text-8xl transform -translate-y-1/2 opacity-75 text-white focus:outline-none hover:opacity-100"
                                 onClick={handlePrevImage}
@@ -77,9 +77,9 @@ const DetalhesAnuncio = () => {
                         </div>
                     )}
                 </div>
-                {images && images.length > 0 && ( 
+                {media && media.length > 0 && ( 
                     <div ref={galleryRef} className='flex gap-2 overflow-x-auto bg-neutral-100 rounded-lg bg-neutral-100'>
-                        {images.map((image, index) => (
+                        {media.map((image, index) => (
                             <div key={index} className='w-28 h-28 flex-shrink-0 cursor-pointer' onClick={() => handleThumbnailClick(index)}>
                                 <img src={`${process.env.REACT_APP_API_URL}${image}`} className='w-full h-full object-cover' />
                             </div>
