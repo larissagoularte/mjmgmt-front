@@ -16,7 +16,7 @@ const CriarAnuncio = () => {
     const [status, setStatus] = useState(true);
     const [rent, setRent] = useState('');
     const [media, setMedia] = useState([]);
-    const [preiewMedia, setPreviewMedia] = useState([]);
+    const [previewMedia, setPreviewMedia] = useState([]);
     const [errMsg, setErrMsg] = useState('');
 
     const fileInputRef = useRef(null);

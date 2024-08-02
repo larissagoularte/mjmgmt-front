@@ -206,10 +206,10 @@ const EditarAnuncio = () => {
                                 <div className='flex flex-wrap gap-4'>
                                 {listing.media.map((image, index) => (
                                     <div key={index} className='relative w-32 h-32'>
-                                        <img src={`${process.env.REACT_APP_API_URL}${media}`} alt={`Imagem ${index}`} className='w-full h-full object-cover rounded' />
+                                        <img src={`${process.env.REACT_APP_API_URL}${image}`} alt={`Imagem ${index}`} className='w-full h-full object-cover rounded' />
                                         <button 
                                             type="button" 
-                                            onClick={() => handleRemoverImagem(media)}
+                                            onClick={() => handleRemoverImagem(image)}
                                             className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 focus:outline-none"
                                         >
                                             <FaTimes size={16} />    
