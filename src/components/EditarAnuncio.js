@@ -32,6 +32,7 @@ const EditarAnuncio = () => {
             } catch (err) {
                 if (!err?.response) {
                     console.log('No Server Response');
+                    console.log(err)
                 } else if (err.response?.status === 404) {
                     console.log('Anuncio not found');
                 } else {
@@ -104,7 +105,6 @@ const EditarAnuncio = () => {
                 body: formData
             });
 
-            console.log(response.data);
             navigate('/');
         } catch (err) {
             if (!err?.response) {
