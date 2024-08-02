@@ -25,8 +25,9 @@ const EditarAnuncio = () => {
                     credentials: 'include'
                 });
 
-                setListing(response.data);
-                setToggleStatus(response.data.status);
+                const data = await response.json();
+                setListing(data);
+                setToggleStatus(data.status);
 
             } catch (err) {
                 if (!err?.response) {
