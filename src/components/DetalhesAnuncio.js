@@ -61,7 +61,7 @@ const DetalhesAnuncio = () => {
                 <div className='bg-neutral-100 md:rounded-lg h-3/5 md:h-[600px] md:p-5'>
                     {media && media.length > 0 && (
                         <div className='relative h-full'>
-                            <img src={`${process.env.REACT_APP_API_URL}${media[currentImageIndex]}`} className=' w-full h-full object-cover md:rounded-md'/>
+                            <img src={`${process.env.REACT_APP_R2_PUBLIC}/${media[currentImageIndex]}`} className=' w-full h-full object-cover md:rounded-md'/>
                             <button
                                 className="absolute top-1/2 text-4xl md:text-8xl transform -translate-y-1/2 opacity-75 text-white focus:outline-none hover:opacity-100"
                                 onClick={handlePrevImage}
@@ -81,7 +81,7 @@ const DetalhesAnuncio = () => {
                     <div ref={galleryRef} className='flex gap-2 overflow-x-auto bg-neutral-100 rounded-lg bg-neutral-100'>
                         {media.map((image, index) => (
                             <div key={index} className='w-28 h-28 flex-shrink-0 cursor-pointer' onClick={() => handleThumbnailClick(index)}>
-                                <img src={`${process.env.REACT_APP_API_URL}${image}`} className='w-full h-full object-cover' />
+                                <img src={`${process.env.REACT_APP_R2_PUBLIC}/${image}`} className='w-full h-full object-cover' />
                             </div>
                         ))}
                     </div>
