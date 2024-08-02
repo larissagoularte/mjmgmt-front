@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
 
 const AuthContext = createContext({});
 
@@ -9,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
         try {
-            const response = await axios.get('/auth/check-auth', { withCredentials: true });
+            const response = await fetch('/auth/check-auth', { credentials: 'include' });
             if (response.status === 200) {
                 setAuth({ user: response.data.user });
             }

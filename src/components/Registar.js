@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import axios from "../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const EMAIL_REGEX=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
