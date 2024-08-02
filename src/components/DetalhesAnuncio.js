@@ -81,7 +81,9 @@ const DetalhesAnuncio = () => {
                     <div ref={galleryRef} className='flex gap-2 overflow-x-auto bg-neutral-100 rounded-lg bg-neutral-100'>
                         {media.map((image, index) => (
                             <div key={index} className='w-28 h-28 flex-shrink-0 cursor-pointer' onClick={() => handleThumbnailClick(index)}>
-                                <img src={`${process.env.REACT_APP_R2_PUBLIC}/${image}`} className='w-full h-full object-cover' />
+                                <a href={`${process.env.REACT_APP_R2_PUBLIC}/${image}`}>
+                                    <img src={`${process.env.REACT_APP_R2_PUBLIC}/${image}`} className='w-full h-full object-cover' />
+                                </a>
                             </div>
                         ))}
                     </div>
