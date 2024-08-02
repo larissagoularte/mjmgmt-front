@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from '../context/AuthProvider';
-import axios from '../api/axios';
 import { Link, useNavigate } from "react-router-dom";
 const LOGIN_URL = process.env.LOGIN_URL
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import axios from '../api/axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import Toggle from 'react-toggle';
@@ -98,8 +97,10 @@ const EditarAnuncio = () => {
         formData.append('data', JSON.stringify(updatedData));
 
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_URL}/listings/${id}`, formData, {
-                withCredentials: true
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/listings/${id}`, {
+                method: 'POST',
+                credentials: 'include',
+                body: formData
             });
 
             console.log(response.data);
