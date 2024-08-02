@@ -3,9 +3,6 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdNavigateNext,MdNavigateBefore } from "react-icons/md";
 
-const LISTINGS_URL = process.env.FETCH_LISTINGS_URL;
-const apiUrl = process.env.API_URL;
-
 const DetalhesAnuncio = () => {
     const { id } = useParams();
     const [listing, setListing] = useState(null);
@@ -19,7 +16,10 @@ const DetalhesAnuncio = () => {
                     credentials: 'include'
                 });
 
-                setListing(response.data);
+                
+
+                const data = await response.json();
+                setListings(data);
                 setCurrentImageIndex(0);
             } catch (err) {
                 if (!err?.response) {
