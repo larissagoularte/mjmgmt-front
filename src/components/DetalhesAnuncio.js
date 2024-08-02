@@ -61,7 +61,7 @@ const DetalhesAnuncio = () => {
                 <div className='bg-neutral-100 md:rounded-lg h-3/5 md:h-[600px] md:p-5'>
                     {media && media.length > 0 && (
                         <div className='relative h-full'>
-                            <a href={`${process.env.REACT_APP_R2_PUBLIC}/${image}`}>
+                            <a href={`${process.env.REACT_APP_R2_PUBLIC}/${media}`}>
                                 <img src={`${process.env.REACT_APP_R2_PUBLIC}/${media[currentImageIndex]}`} className=' w-full h-full object-cover md:rounded-md'/>
                             </a>
                             <button
