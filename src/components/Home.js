@@ -54,8 +54,9 @@ const Home = () => {
     }, []);
 
     const handleDelete = async (id) => {
+        console.log('id:', id)
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/${id}/`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
@@ -71,6 +72,7 @@ const Home = () => {
 
             setListings(listings.filter(listing => listing._id !== id));
         } catch (err) {
+            console.log('catch error: ', err)
             if (!err?.response) {
                 console.log('No Server Response');
             } else if (err.response?.status === 403) {
