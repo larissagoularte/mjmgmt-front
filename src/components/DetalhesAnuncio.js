@@ -19,7 +19,7 @@ const DetalhesAnuncio = () => {
                 
 
                 const data = await response.json();
-                setListings(data);
+                setListing(data);
                 setCurrentImageIndex(0);
             } catch (err) {
                 if (!err?.response) {
