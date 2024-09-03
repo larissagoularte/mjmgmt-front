@@ -100,7 +100,7 @@ const DetalhesAnuncio = () => {
                     </div>
                     <div className='flex items-center gap-1 text-xl text-indigo-500'>
                         <div><FaLocationDot /></div>
-                        <div>{location}</div>
+                        <a href={location} target="_blank" rel="noopener noreferrer">{location}</a>
                     </div>
 
                     <div className='flex gap-3'>
