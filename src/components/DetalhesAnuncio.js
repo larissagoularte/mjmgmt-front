@@ -113,7 +113,7 @@ const DetalhesAnuncio = () => {
                     </div>
                     <div>
                         <h3 className="text-gray-900 font-medium lg:text-xl mb-1 tracking-wide title-font">DESCRIÇÃO</h3>
-                        <div className="text-gray-900 font-normal text-wrap">{description}</div>
+                        <div className="text-gray-900 font-normal whitespace-pre-wrap">{description}</div>
                     </div>
                 </div>
             </div>
