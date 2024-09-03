@@ -93,7 +93,7 @@ const DetalhesAnuncio = () => {
 
             </div>
             <div className='py-5 lg:py-5 lg:pr-5 w-full lg:w-4/12 '>
-                <div className='lg:rounded-lg p-5 flex flex-col gap-3 bg-neutral-100 h-1/2'>
+                <div className='lg:rounded-lg p-5 flex flex-col gap-3 bg-neutral-100 h-full'>
                     <div className='flex justify-between'>
                         <div className='text-2xl md:text-3xl'>{title}</div>
                         <div className='text-xl md:text-3xl font-bold'>{rent} €</div>
